@@ -14,9 +14,28 @@
           />
         </router-link>
       </b-col>
+      <b-col xl="12" v-if="this.isAdmin === 2">
+        <router-link to="/manage">
+          <img
+            src="../../assets/images/icons/manage.png"
+            class="sideMenuIcon"
+          />
+        </router-link>
+      </b-col>
     </b-row>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  name: 'SideMenu',
+  computed: {
+    ...mapGetters(['isAdmin'])
+  }
+}
+</script>
 
 <style scoped>
 #sideMenu {

@@ -87,7 +87,8 @@ export default {
       this.form = {
         user_email: '',
         user_password: '',
-        user_name: ''
+        user_name: '',
+        role_id: 1
       }
     }
   }
@@ -107,7 +108,7 @@ body {
 .card-signin {
   border: 0;
   border-radius: 1rem;
-  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.5);
 }
 .card-signin .card-title {
   margin-bottom: 2rem;

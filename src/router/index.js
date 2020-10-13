@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store/index'
 import Main from '../views/Main.vue'
+import Manage from '../views/Manage.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 
@@ -13,6 +14,12 @@ const routes = [
     name: 'Main',
     component: Main,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/manage',
+    name: 'Manage',
+    component: Manage,
+    meta: { requiresAdmin: true }
   },
   {
     path: '/',
@@ -39,6 +46,14 @@ router.beforeEach((to, from, next) => {
     if (!store.getters.isLogin) {
       next({
         path: '/'
+      })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresAdmin)) {
+    if (store.getters.isAdmin === 1) {
+      next({
+        path: '/main'
       })
     } else {
       next()

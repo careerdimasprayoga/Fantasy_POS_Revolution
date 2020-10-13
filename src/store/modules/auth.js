@@ -47,7 +47,7 @@ export default {
     logout(context) {
       localStorage.removeItem('token')
       context.commit('delUser')
-      router.push('/login')
+      router.push('/')
     },
     interceptorRequest(context) {
       axios.interceptors.request.use(
@@ -73,14 +73,14 @@ export default {
             ) {
               localStorage.removeItem('token')
               context.commit('delUser')
-              router.push('/login')
+              router.push('/')
               alert(
                 'Maaf token anda salah dan anda tidak bisa melanjutkan di halaman ini !'
               )
             } else if (error.response.data.msg === 'jwt expired') {
               localStorage.removeItem('token')
               context.commit('delUser')
-              router.push('/login')
+              router.push('/')
               alert('Maaf token session anda telah habis !')
             }
           }
@@ -94,7 +94,7 @@ export default {
       return state.token !== null
     },
     isAdmin(state) {
-      return state.user.user_role === 1
+      return state.user.role_id
     }
   }
 }
