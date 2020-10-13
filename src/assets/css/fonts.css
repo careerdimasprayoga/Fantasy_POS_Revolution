@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'AirMedium';
+  src: url('../fonts/AirbnbCerealMedium.ttf');
+}
+@font-face {
+  font-family: 'AirBook';
+  src: url('../fonts/AirbnbCerealBook.ttf');
+}
+.font-book {
+  font-family: AirBook;
+}
+.font-medium {
+  font-family: AirMedium;
+}
