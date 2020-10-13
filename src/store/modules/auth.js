@@ -34,9 +34,9 @@ export default {
     register(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`${process.env.VUE_APP_URL}/users/register`, payload)
+          .post(`${process.env.VUE_APP_URL}/user/register`, payload)
           .then(response => {
-            router.push('/login')
+            router.push('/')
             resolve(response.data.msg)
           })
           .catch(error => {
@@ -66,7 +66,6 @@ export default {
           return response
         },
         function(error) {
-          console.log(error.response)
           if (error.response.status === 403) {
             if (
               error.response.data.msg === 'invalid token' ||

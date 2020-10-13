@@ -4,13 +4,19 @@
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
-            <h5 class="card-title text-center font-medium">Sign In</h5>
+            <h5 class="card-title text-center font-medium">Register</h5>
             <div v-if="alert">
               <b-alert show dismissible variant="danger">
                 {{ this.alertMessage }}
               </b-alert>
             </div>
-            <b-form @submit.prevent="onSubmit" @reset.prevent="onReset">
+            <b-form @submit.prevent="onSubmit">
+              <b-form-input
+                type="text"
+                v-model="form.name"
+                placeholder="Input your name"
+              />
+              <br />
               <b-form-input
                 type="email"
                 v-model="form.email"
@@ -31,15 +37,11 @@
               </b-button>
             </b-form>
             <hr />
-
             <div>
               <p class="register-alert">
-                Don't have an account ?
-                <a
-                  @click.prevent="onRegister"
-                  class="register-here"
-                  type="register"
-                  >Register here</a
+                Back to
+                <a @click.prevent="onLogin" class="register-here" type="login"
+                  >Login</a
                 >
               </p>
             </div>
@@ -57,6 +59,7 @@ export default {
   data() {
     return {
       form: {
+        name: '',
         email: '',
         password: ''
       },
@@ -64,28 +67,27 @@ export default {
       alertMessage: ''
     }
   },
-  computed: {
-    ...mapState(['name'])
-  },
+  computed: {},
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(['register']),
     onSubmit() {
-      this.login(this.form)
+      this.register(this.form)
         .then(result => {
-          this.$router.push('/main')
+          this.$router.push('/')
         })
         .catch(error => {
           this.alertMessage = error
           this.alert = true
         })
     },
-    onRegister() {
-      this.$router.push('/register')
+    onLogin() {
+      this.$router.push('/')
     },
     onReset() {
       this.form = {
-        email: '',
-        password: ''
+        user_email: '',
+        user_password: '',
+        user_name: ''
       }
     }
   }

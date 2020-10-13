@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import store from '../store/index'
 import Main from '../views/Main.vue'
 import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -18,13 +19,13 @@ const routes = [
     name: 'Login',
     component: Login,
     meta: { requiresVisitor: true }
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: { requiresVisitor: true }
   }
-  // {
-  //   path: '/register',
-  //   name: 'Register',
-  //   component: Register,
-  //   meta: { requiresVisitor: true }
-  // }
 ]
 
 const router = new VueRouter({
@@ -37,7 +38,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!store.getters.isLogin) {
       next({
-        path: '/login'
+        path: '/'
       })
     } else {
       next()
