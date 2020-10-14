@@ -1,5 +1,6 @@
 <template>
   <div id="product">
+    Bsisaaa {{this.mipan}}
     <b-row>
       <b-col sm="12">
         <div class="searchStyle">
@@ -115,12 +116,12 @@ export default {
       textSort: 'Sort',
       currentPage: 1,
       urlApi: process.env.VUE_APP_URL,
-      cart: [],
+      // cart: [],
       search: ''
     }
   },
   computed: {
-    ...mapGetters(['dataProducts', 'dataTotalProducts'])
+    ...mapGetters(['dataProducts', 'dataTotalProducts', 'mipan'])
     // ...mapGetters(['dataProducts', 'dataCarts'])
   },
   methods: {
@@ -130,12 +131,9 @@ export default {
       actionTotalProducts: 'getTotalProducts'
     }),
     ...mapMutations({
-      mutationChangePage: 'pushChangePage'
+      mutationChangePage: 'pushChangePage',
+      mutationAddCart: 'pushCarts'
     }),
-    // ...mapMutations({
-    //   mutationChangePage: 'pushChangePage',
-    //   mutationAddCart: 'pushCart'
-    // }),
     changePage(page) {
       if (parseInt(this.$route.query.page) !== page) {
         this.$router.push(`?page=${page}`)
@@ -160,15 +158,16 @@ export default {
         ppn: (data.price * 5) / 100,
         qty: 1
       }
-      const fixedData = [...this.cart, dataCart]
-      const addedItem = fixedData.find(item => item.product_id === data.id)
-      const existItem = this.cart.find(item => item.product_id === data.id)
-      if (existItem) {
-        addedItem.qty += 1
-      } else {
-        this.cart = [...this.cart, dataCart]
-        // this.mutationAddCart = [...this.cart, dataCart]
-      }
+      this.mutationAddCart(dataCart)
+      // const fixedData = [...this.cart, dataCart]
+      // const addedItem = fixedData.find(item => item.product_id === data.id)
+      // const existItem = this.cart.find(item => item.product_id === data.id)
+      // if (existItem) {
+      //   addedItem.qty += 1
+      // } else {
+      //   this.cart = [...this.cart, dataCart]
+      //   // this.mutationAddCart = [...this.cart, dataCart]
+      // }
     }
   },
   created() {

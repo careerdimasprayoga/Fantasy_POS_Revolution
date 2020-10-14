@@ -2,19 +2,30 @@ import axios from 'axios'
 
 export default {
   state: {
-    // carts: []
+    carts: [],
+    dataTest: 'mipan'
   },
   mutations: {
-    // pushCartsss(state, payload) {
-    //   state.carts = [...carts, payload]
-    //   console.log(payload)
-    //   console.log(carts)
-    // }
+    pushCarts(state, payload) {
+      const fixedData = [...state.carts, payload]
+      const addedItem = fixedData.find(
+        item => item.product_id === payload.product_id
+      )
+      const existItem = state.carts.find(
+        item => item.product_id === payload.product_id
+      )
+      if (existItem) {
+        addedItem.qty += 1
+      } else {
+        state.carts = [...state.carts, payload]
+      }
+      console.log(state.carts)
+    }
   },
   actions: {},
   getters: {
-    // dataCartssss(state) {
-    //   return state.carts
-    // }
+    mipan(state) {
+      return state.mipan
+    }
   }
 }

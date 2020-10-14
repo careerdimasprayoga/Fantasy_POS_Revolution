@@ -1,5 +1,7 @@
 <template>
   <b-row>
+    Bisa
+    {{ this.looping }}
     <b-col
       sm="12"
       v-if="getterDataCarts === undefined || getterDataCarts.length > 0"
@@ -92,8 +94,7 @@ export default {
   name: 'Cart',
   data() {
     return {
-      // cartssss: [],
-      getterDataCarts: [1,2,3,4,5,6]
+      getterDataCarts: []
     }
   },
   methods: {
@@ -102,7 +103,9 @@ export default {
     }
   },
   computed: {
-    // ...mapGetters({ getterDataCarts: 'dataCarts' })
+    ...mapGetters({
+      looping: 'mipan'
+    })
   }
 }
 </script>

@@ -9,9 +9,9 @@ export default {
     // carts: []
   },
   mutations: {
-    pushProducts(state, payload) {
-      state.products = payload.data
-    },
+    // pushProducts(state, payload) {
+    //   state.products = payload.data
+    // },
     pushChangePage(state, payload) {
       state.page = payload
     },
