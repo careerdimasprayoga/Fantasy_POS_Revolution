@@ -3,6 +3,7 @@ import axios from 'axios'
 export default {
   state: {
     products: [],
+    idProducts: 1,
     page: 1,
     limit: 6,
     totalProducts: 1
@@ -16,6 +17,9 @@ export default {
     },
     pushTotalProducts(state, payload) {
       state.totalProducts = payload
+    },
+    pushSendIdProducts(state, payload) {
+      state.idProducts = payload
     }
   },
   actions: {
@@ -60,6 +64,45 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    deleteProducts(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .delete(`${process.env.VUE_APP_URL}/product/${payload}`)
+          .then(response => {
+            resolve(response.data.msg)
+          })
+          .catch(error => {
+            reject(error.response.data.msg)
+          })
+      })
+    },
+    addProducts(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${process.env.VUE_APP_URL}/product`, payload)
+          .then(response => {
+            resolve(response.data.msg)
+          })
+          .catch(error => {
+            reject(error.response.data.msg)
+          })
+      })
+    },
+    editProducts(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(
+            `${process.env.VUE_APP_URL}/product/${context.state.idProducts}`,
+            payload
+          )
+          .then(response => {
+            resolve(response.data.msg)
+          })
+          .catch(error => {
+            reject(error.response.data.msg)
+          })
+      })
     }
   },
   getters: {
