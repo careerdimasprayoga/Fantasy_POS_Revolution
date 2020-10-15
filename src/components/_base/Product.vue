@@ -1,6 +1,5 @@
 <template>
   <div id="product">
-    Bsisaaa {{this.mipan}}
     <b-row>
       <b-col sm="12">
         <div class="searchStyle">
@@ -22,33 +21,33 @@
               class="m-2 sort-btn"
               variant="primary"
             >
-              <b-dropdown-item-button @click="sort_category()" active
+              <b-dropdown-item-button @click="sort('id_category')" active
                 >Category</b-dropdown-item-button
               >
               <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-group id="dropdown-group-1" header="Name">
-                <b-dropdown-item-button @click="sort_asc()"
+                <b-dropdown-item-button @click="sort('name asc')"
                   >A-Z</b-dropdown-item-button
                 >
-                <b-dropdown-item-button @click="sort_desc()"
+                <b-dropdown-item-button @click="sort('name desc')"
                   >Z-A</b-dropdown-item-button
                 >
               </b-dropdown-group>
               <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-group id="dropdown-group-2" header="Date">
-                <b-dropdown-item-button @click="sort_date_asc()"
+                <b-dropdown-item-button @click="sort('created desc')"
                   >Oldest</b-dropdown-item-button
                 >
-                <b-dropdown-item-button @click="sort_date_desc()"
+                <b-dropdown-item-button @click="sort('created asc')"
                   >Newest</b-dropdown-item-button
                 >
               </b-dropdown-group>
               <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-group id="dropdown-group-3" header="Price">
-                <b-dropdown-item-button @click="sort_price_asc()"
+                <b-dropdown-item-button @click="sort('price asc')"
                   >Lowest</b-dropdown-item-button
                 >
-                <b-dropdown-item-button @click="sort_price_desc()"
+                <b-dropdown-item-button @click="sort('price desc')"
                   >Highest</b-dropdown-item-button
                 >
               </b-dropdown-group>
@@ -116,19 +115,18 @@ export default {
       textSort: 'Sort',
       currentPage: 1,
       urlApi: process.env.VUE_APP_URL,
-      // cart: [],
       search: ''
     }
   },
   computed: {
-    ...mapGetters(['dataProducts', 'dataTotalProducts', 'mipan'])
-    // ...mapGetters(['dataProducts', 'dataCarts'])
+    ...mapGetters(['dataProducts', 'dataTotalProducts', 'getCart'])
   },
   methods: {
     ...mapActions({
       actionGetProducts: 'getProducts',
       actionSearchProducts: 'searchProducts',
-      actionTotalProducts: 'getTotalProducts'
+      actionTotalProducts: 'getTotalProducts',
+      actionSortProducts: 'sortProducts'
     }),
     ...mapMutations({
       mutationChangePage: 'pushChangePage',
@@ -148,6 +146,9 @@ export default {
         this.actionSearchProducts(this.search)
       }
     },
+    sort(data) {
+      this.actionSortProducts(data)
+    },
     addToCart(data) {
       let dataCart = {
         product_id: data.id,
@@ -159,15 +160,6 @@ export default {
         qty: 1
       }
       this.mutationAddCart(dataCart)
-      // const fixedData = [...this.cart, dataCart]
-      // const addedItem = fixedData.find(item => item.product_id === data.id)
-      // const existItem = this.cart.find(item => item.product_id === data.id)
-      // if (existItem) {
-      //   addedItem.qty += 1
-      // } else {
-      //   this.cart = [...this.cart, dataCart]
-      //   // this.mutationAddCart = [...this.cart, dataCart]
-      // }
     }
   },
   created() {

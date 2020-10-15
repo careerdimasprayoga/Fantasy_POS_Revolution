@@ -1,33 +1,55 @@
 <template>
   <b-row>
-    Bisa
-    {{ this.looping }}
-    <b-col
-      sm="12"
-      v-if="getterDataCarts === undefined || getterDataCarts.length > 0"
-    >
+    <b-col sm="12" v-if="getCart === undefined || getCart.length > 0">
       <b-container>
         <div style="height: 405px; overflow: auto">
           <div>
             <b-card
-              img-src="https://picsum.photos/600/300/?image=306"
+              v-bind:img-src="urlApi + '/' + item.product_image"
               img-alt="Cart Image"
               img-left
               class="styleCardImage mt-2"
               style="border: none"
-              v-for="(item, index) in getterDataCarts"
+              v-for="(item, index) in getCart"
               :key="index"
             >
-              <b-card-text class="styleName">Kambing Hitam</b-card-text>
+              <b-card-text class="styleName">{{
+                item.product_name
+              }}</b-card-text>
 
-              <b-button variant="primary" class="cart-qty" size="sm"
+              <b-button
+                variant="primary"
+                class="cart-qty"
+                size="sm"
+                @click="qtyMin(item)"
                 >-</b-button
               >
-              <b-button variant="primary" size="sm" class="styleQty"
-                >3</b-button
-              >
-              <b-button variant="primary" class="cart-qty" size="sm"
+              <b-button variant="primary" size="sm" class="styleQty">{{
+                item.qty
+              }}</b-button>
+              <b-button
+                variant="primary"
+                class="cart-qty"
+                size="sm"
+                @click="qtyPlus(item)"
                 >+</b-button
+              >
+              <b-button
+                variant="primary"
+                size="sm"
+                class="font-medium text-right"
+                style="
+                  background-color: white;
+                  color: black;
+                  border: none;
+                  margin-left: 6px;
+                "
+                >Rp.
+                {{
+                  (item.product_price * item.qty)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                }}</b-button
               >
             </b-card>
           </div>
@@ -51,7 +73,7 @@
                 variant="danger"
                 size="md"
                 style="width: 100%"
-                @click="resetCart()"
+                @click="resetCarts()"
                 >Cancel</b-button
               >
             </b-col>
@@ -89,28 +111,31 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Cart',
   data() {
     return {
-      getterDataCarts: []
-    }
-  },
-  methods: {
-    resetCart() {
-      this.cart = []
+      urlApi: process.env.VUE_APP_URL
     }
   },
   computed: {
-    ...mapGetters({
-      looping: 'mipan'
-    })
+    ...mapGetters(['getCart'])
+  },
+  methods: {
+    ...mapMutations(['resetCarts', 'qtyPlusCarts', 'qtyMinCarts']),
+    qtyPlus(data) {
+      this.qtyPlusCarts(data)
+    },
+    qtyMin(data) {
+      this.qtyMinCarts(data)
+    }
   }
 }
 </script>
 
 <style scoped>
+@import '../../assets/css/fonts.css';
 #cart {
   background-color: #ffffff;
   height: 700px;

@@ -6,21 +6,17 @@ export default {
     page: 1,
     limit: 6,
     totalProducts: 1
-    // carts: []
   },
   mutations: {
-    // pushProducts(state, payload) {
-    //   state.products = payload.data
-    // },
+    pushProducts(state, payload) {
+      state.products = payload.data
+    },
     pushChangePage(state, payload) {
       state.page = payload
     },
     pushTotalProducts(state, payload) {
       state.totalProducts = payload
     }
-    // pushCart(state, payload) {
-    //   state.carts = [...state.carts, payload]
-    // }
   },
   actions: {
     getProducts(context, payload) {
@@ -38,6 +34,16 @@ export default {
     searchProducts(context, payload) {
       axios
         .get(`${process.env.VUE_APP_URL}/product/search?search=${payload}`)
+        .then(response => {
+          context.commit('pushProducts', response.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    sortProducts(context, payload) {
+      axios
+        .get(`${process.env.VUE_APP_URL}/product/sort?sort=${payload}`)
         .then(response => {
           context.commit('pushProducts', response.data)
         })
@@ -63,8 +69,5 @@ export default {
     dataTotalProducts(state) {
       return state.totalProducts
     }
-    // dataCarts(state) {
-    //   return state.carts
-    // }
   }
 }

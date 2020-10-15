@@ -2,8 +2,7 @@ import axios from 'axios'
 
 export default {
   state: {
-    carts: [],
-    dataTest: 'mipan'
+    carts: []
   },
   mutations: {
     pushCarts(state, payload) {
@@ -19,13 +18,34 @@ export default {
       } else {
         state.carts = [...state.carts, payload]
       }
-      console.log(state.carts)
+    },
+    resetCarts(state, payload) {
+      state.carts = []
+    },
+    qtyPlusCarts(state, payload) {
+      const incrementData = state.carts.find(
+        value => value.product_id === payload.product_id
+      )
+      incrementData.qty += 1
+      incrementData.price = payload.product_price * payload.qty
+      incrementData.ppn = (payload.price * 5) / 100
+    },
+    qtyMinCarts(state, payload) {
+      const incrementData = state.carts.find(
+        value => value.product_id === payload.product_id
+      )
+      incrementData.qty -= 1
+      if (incrementData.qty < 1) {
+        state.carts = state.carts.filter(
+          item => item.product_id !== incrementData.product_id
+        )
+      }
     }
   },
   actions: {},
   getters: {
-    mipan(state) {
-      return state.mipan
+    getCart(state) {
+      return state.carts
     }
   }
 }
