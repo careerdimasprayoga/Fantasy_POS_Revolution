@@ -21,33 +21,33 @@
               class="m-2 sort-btn"
               variant="primary"
             >
-              <b-dropdown-item-button @click="sort('id_category')" active
+              <b-dropdown-item-button @click="sort('category')" active
                 >Category</b-dropdown-item-button
               >
               <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-group id="dropdown-group-1" header="Name">
-                <b-dropdown-item-button @click="sort('name asc')"
+                <b-dropdown-item-button @click="sort('nameASC')"
                   >A-Z</b-dropdown-item-button
                 >
-                <b-dropdown-item-button @click="sort('name desc')"
+                <b-dropdown-item-button @click="sort('nameDESC')"
                   >Z-A</b-dropdown-item-button
                 >
               </b-dropdown-group>
               <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-group id="dropdown-group-2" header="Date">
-                <b-dropdown-item-button @click="sort('created desc')"
+                <b-dropdown-item-button @click="sort('oldest')"
                   >Oldest</b-dropdown-item-button
                 >
-                <b-dropdown-item-button @click="sort('created asc')"
+                <b-dropdown-item-button @click="sort('newest')"
                   >Newest</b-dropdown-item-button
                 >
               </b-dropdown-group>
               <b-dropdown-divider></b-dropdown-divider>
               <b-dropdown-group id="dropdown-group-3" header="Price">
-                <b-dropdown-item-button @click="sort('price asc')"
+                <b-dropdown-item-button @click="sort('lowest')"
                   >Lowest</b-dropdown-item-button
                 >
-                <b-dropdown-item-button @click="sort('price desc')"
+                <b-dropdown-item-button @click="sort('highest')"
                   >Highest</b-dropdown-item-button
                 >
               </b-dropdown-group>
