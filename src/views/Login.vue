@@ -15,6 +15,7 @@
                 type="email"
                 v-model="form.email"
                 placeholder="Input your email"
+                v-focus
               />
               <br />
               <b-form-input
@@ -64,6 +65,13 @@ export default {
       alertMessage: ''
     }
   },
+  directives: {
+    focus: {
+      inserted: function (el) {
+        el.focus()
+      }
+    }
+  },
   computed: {
     ...mapState(['name'])
   },
@@ -71,10 +79,10 @@ export default {
     ...mapActions(['login']),
     onSubmit() {
       this.login(this.form)
-        .then(result => {
+        .then((result) => {
           this.$router.push('/main')
         })
-        .catch(error => {
+        .catch((error) => {
           this.alertMessage = error
           this.alert = true
         })

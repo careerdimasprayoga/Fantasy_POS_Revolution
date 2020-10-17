@@ -32,10 +32,6 @@
                 <div v-if="data.item.status === 1">Available</div>
                 <div v-if="data.item.status === 0">Not Available</div>
               </template>
-              <template v-slot:cell(status)="data">
-                <div v-if="data.item.status === 1">Available</div>
-                <div v-if="data.item.status === 0">Not Available</div>
-              </template>
               <template v-slot:cell(image)="data">
                 <img
                   v-bind:src="urlApi + '/' + data.item.image"
@@ -143,14 +139,14 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
+import mixins from '../../mixins/mixins'
 
 export default {
   name: 'Manage',
+  mixins: [mixins],
   data() {
     return {
-      urlApi: process.env.VUE_APP_URL,
       conditionEdit: false,
-      textSort: 'sort',
       fields: [
         { key: 'image', label: 'Image' },
         { key: 'name', label: 'Product Name' },
@@ -166,16 +162,10 @@ export default {
         price: '',
         status: ''
       },
-      alertSuccess: false,
-      alertSuccessMessage: '',
-      alertError: false,
-      alertErrorMessage: '',
-      modalTitle: '',
       selectOptionStatus: [
         { value: '1', text: 'Active' },
         { value: '0', text: 'Non Active' }
       ],
-      currentPage: 1,
       getEditDataProductId: 0
     }
   },
