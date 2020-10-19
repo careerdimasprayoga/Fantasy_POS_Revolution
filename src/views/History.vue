@@ -8,7 +8,7 @@
         <SideMenu />
       </b-col>
       <b-col sm="11" style="padding: 0">
-        <Manage />
+        <HistoryComponents />
       </b-col>
     </b-row>
   </b-container>
@@ -17,14 +17,14 @@
 <script>
 import HeaderNormal from '@/components/_base/Header_normal.vue'
 import SideMenu from '@/components/_base/SideMenu.vue'
-import Manage from '@/components/_base/Manage.vue'
+import HistoryComponents from '@/components/_base/History.vue'
 
 export default {
-  name: 'Manage',
+  name: 'History',
   components: {
     HeaderNormal,
     SideMenu,
-    Manage
+    HistoryComponents
   }
 }
 </script>

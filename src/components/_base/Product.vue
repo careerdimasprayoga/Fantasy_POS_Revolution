@@ -107,9 +107,11 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import mixins from '../../mixins/mixins'
 
 export default {
   name: 'Product',
+  mixins: [mixins],
   data() {
     return {
       textSort: 'Sort',
@@ -151,6 +153,7 @@ export default {
     },
     addToCart(data) {
       let dataCart = {
+        invoice: this.invoice,
         product_id: data.id,
         product_name: data.name,
         product_image: data.image,

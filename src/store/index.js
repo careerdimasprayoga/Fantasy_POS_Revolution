@@ -4,6 +4,8 @@ import Auth from './modules/auth'
 import Product from './modules/product'
 import Category from './modules/category'
 import Cart from './modules/cart'
+import Order from './modules/order'
+import History from './modules/history'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
@@ -18,7 +20,9 @@ export default new Vuex.Store({
     Auth,
     Product,
     Category,
-    Cart
+    Cart,
+    Order,
+    History
   },
   plugins: [
     createPersistedState({

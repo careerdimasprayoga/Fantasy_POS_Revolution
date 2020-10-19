@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import store from '../store/index'
 import Main from '../views/Main.vue'
 import Manage from '../views/Manage.vue'
+import History from '../views/History.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 
@@ -19,6 +20,12 @@ const routes = [
     path: '/manage',
     name: 'Manage',
     component: Manage,
+    meta: { requiresAdmin: true }
+  },
+  {
+    path: '/history',
+    name: 'History',
+    component: History,
     meta: { requiresAdmin: true }
   },
   {

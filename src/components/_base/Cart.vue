@@ -60,13 +60,86 @@
               <p>Total:</p>
             </b-col>
             <b-col xl="8" style="margin-top: 10px">
-              <p class="text-right">Rp. 30.000 *</p>
+              <p class="text-right">
+                Rp.
+                {{
+                  TotalCart()
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                }}
+                *
+              </p>
             </b-col>
             <b-col xl="12">
-              <b-button squared variant="info" size="md" style="width: 100%"
+              <b-button
+                squared
+                variant="info"
+                size="md"
+                style="width: 100%"
+                v-b-modal.modal-checkout
                 >Checkout</b-button
               >
             </b-col>
+            <!-- ================ Modal ================ -->
+            <b-modal id="modal-checkout" hide-header hide-footer>
+              <b-row>
+                <b-col sm="6">
+                  <p class="font-medium">Checkout</p>
+                </b-col>
+                <b-col sm="6" class="text-right">
+                  <p class="font-medium">Receipt no: #{{ this.invoice }}</p>
+                </b-col>
+                <b-col sm="12" style="margin-top: -15px; margin-bottom: 15px">
+                  <p class="font-book">Cashier: {{ this.userLogin.name }}</p>
+                </b-col>
+                <b-col sm="12" v-for="(item, index) in getCart" :key="index">
+                  <p class="font-medium">
+                    {{ item.product_name }} ({{ item.qty }}x)
+                    <span class="float-right"
+                      >Rp.
+                      {{
+                        (item.product_price * item.qty)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                      }}</span
+                    >
+                  </p>
+                </b-col>
+                <b-col sm="12">
+                  <p class="font-medium text-right">
+                    Total : Rp.
+                    {{
+                      TotalCart()
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                    }}
+                  </p>
+                </b-col>
+                <b-col sm="12">
+                  <p class="font-medium">Payment: Cash</p>
+                </b-col>
+                <b-col sm="12">
+                  <b-button
+                    v-b-modal.modal-checkout
+                    variant="info"
+                    size="md"
+                    class="styleModalCheckout"
+                    @click="checkout()"
+                    >Print</b-button
+                  >
+                </b-col>
+                <b-col sm="12">
+                  <p class="font-medium text-center" style="margin-bottom: 5px">
+                    Or
+                  </p>
+                </b-col>
+                <b-col sm="12">
+                  <b-button variant="info" size="md" style="width: 100%"
+                    >Send Email</b-button
+                  >
+                </b-col>
+              </b-row>
+            </b-modal>
             <b-col xl="12" style="margin-top: 10px">
               <b-button
                 squared
@@ -111,24 +184,47 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import mixins from '../../mixins/mixins'
 export default {
   name: 'Cart',
+  mixins: [mixins],
   data() {
     return {
       urlApi: process.env.VUE_APP_URL
     }
   },
   computed: {
-    ...mapGetters(['getCart'])
+    ...mapGetters(['getCart', 'userLogin'])
   },
   methods: {
     ...mapMutations(['resetCarts', 'qtyPlusCarts', 'qtyMinCarts']),
+    ...mapActions(['addOrders']),
     qtyPlus(data) {
       this.qtyPlusCarts(data)
     },
     qtyMin(data) {
       this.qtyMinCarts(data)
+    },
+    TotalCart() {
+      let total = 0
+      for (let i = 0; i < this.getCart.length; i++) {
+        total += this.getCart[i].product_price * this.getCart[i].qty
+      }
+      return total
+    },
+    checkout() {
+      const dataCarts = {
+        orders: [...this.getCart]
+      }
+      console.log(dataCarts)
+      this.addOrders(dataCarts)
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
@@ -196,5 +292,10 @@ export default {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #7e98df;
+}
+.styleModalCheckout {
+  width: 100%;
+  background-color: #f24f8a;
+  margin-bottom: 5px;
 }
 </style>

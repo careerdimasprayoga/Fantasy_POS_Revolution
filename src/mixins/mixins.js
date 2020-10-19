@@ -12,7 +12,8 @@ export default {
         { value: '0', text: 'Not Available' }
       ],
       currentPage: 1,
-      textSort: 'sort'
+      textSort: 'sort',
+      invoice: Math.floor(Math.random() * 1000000000 + 1)
     }
   }
 }

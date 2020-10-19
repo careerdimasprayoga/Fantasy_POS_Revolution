@@ -170,7 +170,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['dataProducts', 'dataCategorys', 'dataTotalProducts'])
+    ...mapGetters([
+      'dataProducts',
+      'dataCategorys',
+      'dataTotalProducts',
+      'userLogin'
+    ])
   },
   methods: {
     ...mapActions({
@@ -280,6 +285,7 @@ export default {
     this.actionGetProducts()
     this.actionGetCategorys()
     this.actionTotalProducts()
+    console.log(this.userLogin)
   }
 }
 </script>
