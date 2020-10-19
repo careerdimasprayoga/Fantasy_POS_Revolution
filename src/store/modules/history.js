@@ -2,11 +2,23 @@ import axios from 'axios'
 
 export default {
   state: {
-    chartThisMonth: []
+    chartThisMonth: '',
+    todayIncome: '',
+    totalOrder: '',
+    yearIncome: ''
   },
   mutations: {
     pushChartThisMonth(state, payload) {
       state.chartThisMonth = payload
+    },
+    pushCardTodayIncome(state, payload) {
+      state.todayIncome = payload
+    },
+    pushCardTotalOrder(state, payload) {
+      state.totalOrder = payload
+    },
+    pushCardYearIncome(state, payload) {
+      state.yearIncome = payload
     }
   },
   actions: {
@@ -15,13 +27,36 @@ export default {
         .get(`${process.env.VUE_APP_URL}/order/this_month`)
         .then(response => {
           context.commit('pushChartThisMonth', response.data.data)
-          // const setChart = response.data.data
-          // for (let i = 0; i < setChart.length; i++) {
-          //   context.state.chartThisMonth.push([
-          //     setChart[i].dates,
-          //     setChart[i].subtotals
-          //   ])
-          // }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    getCardTodayIncome(context, payload) {
+      axios
+        .get(`${process.env.VUE_APP_URL}/order/today_income`)
+        .then(response => {
+          context.commit('pushCardTodayIncome', response.data.data[0].subtotals)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    getCardTotalOrder(context, payload) {
+      axios
+        .get(`${process.env.VUE_APP_URL}/order/total_order`)
+        .then(response => {
+          context.commit('pushCardTotalOrder', response.data.data[0].totals)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    getCardYearIncome(context, payload) {
+      axios
+        .get(`${process.env.VUE_APP_URL}/order/total_yearIncome`)
+        .then(response => {
+          context.commit('pushCardYearIncome', response.data.data[0].subtotals)
         })
         .catch(error => {
           console.log(error)
@@ -31,6 +66,15 @@ export default {
   getters: {
     dataChatThisMonth(state) {
       return state.chartThisMonth
+    },
+    dataTodayIncome(state) {
+      return state.todayIncome
+    },
+    dataTotalOrder(state) {
+      return state.totalOrder
+    },
+    dataYearIncome(state) {
+      return state.yearIncome
     }
   }
 }

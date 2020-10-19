@@ -6,8 +6,8 @@
           <img src="../../assets/images/icons/fork.png" class="sideMenuIcon" />
         </router-link>
       </b-col>
-      <b-col xl="12">
-        <router-link to="/">
+      <b-col xl="12" v-if="this.isAdmin === 2">
+        <router-link to="/history">
           <img
             src="../../assets/images/icons/clipboard.png"
             class="sideMenuIcon"
@@ -22,17 +22,27 @@
           />
         </router-link>
       </b-col>
+      <b-col xl="12">
+        <img
+          src="../../assets/images/icons/fire-exit.png"
+          class="sideMenuIcon cursorPointer"
+          @click="logout"
+        />
+      </b-col>
     </b-row>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'SideMenu',
   computed: {
     ...mapGetters(['isAdmin'])
+  },
+  methods: {
+    ...mapActions(['logout'])
   }
 }
 </script>
@@ -47,5 +57,8 @@ export default {
   width: 50px;
   height: 50px;
   margin-top: 25px;
+}
+.cursorPointer {
+  cursor: pointer;
 }
 </style>

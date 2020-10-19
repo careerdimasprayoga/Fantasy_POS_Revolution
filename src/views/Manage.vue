@@ -20,7 +20,7 @@ import SideMenu from '@/components/_base/SideMenu.vue'
 import Manage from '@/components/_base/Manage.vue'
 
 export default {
-  name: 'Manage',
+  name: 'Home2',
   components: {
     HeaderNormal,
     SideMenu,

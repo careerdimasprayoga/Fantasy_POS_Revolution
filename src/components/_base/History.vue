@@ -8,7 +8,14 @@
             style="background-image: linear-gradient(120deg, #fbb2b4, white)"
           >
             <p class="card-text">Today's Income</p>
-            <h5 class="card-title">Rp. 680.000</h5>
+            <h5 class="card-title">
+              Rp.
+              {{
+                this.dataTodayIncome
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+              }}
+            </h5>
             <p class="card-text">+54% Yesterday</p>
           </div>
         </div>
@@ -19,9 +26,10 @@
             class="card-body rounded"
             style="background-image: linear-gradient(120deg, #29dfff, white)"
           >
-            <p class="card-text">Orders</p>
-            <h5 class="card-title">52 Orders</h5>
-            <p class="card-text">+5% Lastweek</p>
+            <!-- <p class="card-text">Today's Order</p> -->
+            <p class="card-text">Total's Order</p>
+            <h5 class="card-title">Total {{ this.dataTotalOrder }}</h5>
+            <p class="card-text">+5% Yesterday</p>
           </div>
         </div>
       </b-col>
@@ -32,7 +40,14 @@
             style="background-image: linear-gradient(120deg, #ab84c8, white)"
           >
             <p class="card-text">This Year's Income</p>
-            <h5 class="card-title">Rp. 50.000.320</h5>
+            <h5 class="card-title">
+              Rp.
+              {{
+                this.dataYearIncome
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+              }}
+            </h5>
             <p class="card-text">+89% Lastyear</p>
           </div>
         </div>
@@ -40,15 +55,14 @@
       <b-col xl="12">
         <div class="styleCard mt-3 rounded">
           <h4 class="mb-5 mt-1">Revenue</h4>
-          <area-chart
-            :data="{
-              '2017-01-01': 2,
-              '2017-01-02': 5,
-              '2017-01-03': 0,
-              '2017-01-04': 20,
-              '2017-01-05': 3
-            }"
-          ></area-chart>
+          <area-chart :data="dataChart"></area-chart>
+        </div>
+      </b-col>
+      <b-col xl="12">
+        <div class="styleCard mt-3 rounded">
+          <h4 class="mb-5 mt-1">Recent Order</h4>
+          <b-table small :fields="fields" :items="dataOrder" responsive="sm">
+          </b-table>
         </div>
       </b-col>
     </b-row>
@@ -56,32 +70,59 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Header',
   data() {
     return {
-      mipan: [
-        {
-          dates: new Date(2020, 10, 12),
-          subtotals: 250000
-        },
-        {
-          dates: new Date(2020, 10, 13),
-          subtotals: 220000
-        }
+      dataChart: {},
+      fields: [
+        { key: 'invoices', label: 'Invoice' },
+        { key: 'cashier', label: 'Cashier' },
+        { key: 'dates', label: 'Date' },
+        { key: 'names', label: 'Order' },
+        { key: 'subtotals', label: 'Amount' }
       ]
     }
   },
   computed: {
-    ...mapGetters(['dataChatThisMonth'])
+    ...mapGetters([
+      'dataChatThisMonth',
+      'dataTodayIncome',
+      'dataTotalOrder',
+      'dataYearIncome',
+      'dataOrder'
+    ])
   },
   methods: {
-    ...mapActions(['getChartThisMonth'])
+    ...mapActions([
+      'getChartThisMonth',
+      'getCardTodayIncome',
+      'getCardTotalOrder',
+      'getCardTotalOrder',
+      'getCardYearIncome',
+      'getOrder'
+    ]),
+    chartConvert() {
+      let result = {}
+      for (let i = 0; i < this.dataChatThisMonth.length; i++) {
+        result[this.dataChatThisMonth[i].dates] = this.dataChatThisMonth[
+          i
+        ].subtotals
+      }
+      this.dataChart = result
+    }
   },
   created() {
     this.getChartThisMonth()
-    console.log(this.dataChatThisMonth)
+    this.getCardTodayIncome()
+    this.getCardTotalOrder()
+    this.getCardTotalOrder()
+    this.getCardYearIncome()
+    this.chartConvert()
+    this.getOrder()
+    this.getOrder()
+    console.log(this.dataOrder)
   }
 }
 </script>
@@ -94,5 +135,10 @@ export default {
 .styleCard {
   background-color: white;
   padding: 20px;
+}
+.paginationStyle {
+  margin-left: 40%;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 </style>
