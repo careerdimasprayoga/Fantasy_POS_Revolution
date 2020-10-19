@@ -271,6 +271,8 @@ export default {
         })
     },
     resetForm() {
+      this.alertError = false
+      this.alertSuccess = false
       this.form = []
     }
   },
