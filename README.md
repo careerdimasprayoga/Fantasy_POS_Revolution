@@ -7,7 +7,7 @@
     <a href="https://github.com/careerdimasprayoga/Fantasy_POS_Revolution_backend/issues">Request Feature</a>
   </p>
 
-![Image Banner](https://raw.githubusercontent.com/Bagusth15/team-project/master/image_banner.jpg)
+![Image Banner](https://user-images.githubusercontent.com/66796874/96396822-43ab7500-11f2-11eb-9f1c-ec519906cf39.jpg)
 
 ## About The Project
 
