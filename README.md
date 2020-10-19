@@ -26,13 +26,13 @@ Di era perkembangan teknologi yang pesat saat ini, saya memiliki ide untuk membu
 
 ## Getting Started
 
-1. Download this Project or you can type `git clone #link_git`
+1. Download this Project or you can type `git clone https://github.com/careerdimasprayoga/Fantasy_POS_Revolution.git`
 2. Open app's directory in CMD or Terminal
 3. Type `npm install` or `yarn install`
 4. Add .env file at root folder project
 
-```sh
-VUE_APP_ENDPOINT = [Backend API]
+```
+VUE_APP_URL = https://fantasy-pos-revolution.fwdev.online / [Backend API]
 ```
 
 5. Type `npm run serve`
@@ -41,14 +41,9 @@ VUE_APP_ENDPOINT = [Backend API]
 
 - [Axios](https://www.npmjs.com/package/axios)
 - [Vuex](https://vuex.vuejs.org/)
+- [Express](https://www.npmjs.com/package/express)
+- [vue-Bootstrap](https://bootstrap-vue.org/)
 
-## Team
+## License
 
-> All Members of Default Team
-
-|     <a href="https://blog.udacity.com/2014/12/front-end-vs-back-end-vs-full-stack-web-developers.html" target="_blank">**Full-Stack Developer & Team Leader**</a>     | <a href="https://blog.udacity.com/2014/12/front-end-vs-back-end-vs-full-stack-web-developers.html" target="_blank">**Front-End Developer**</a> | <a href="https://blog.udacity.com/2014/12/front-end-vs-back-end-vs-full-stack-web-developers.html" target="_blank">**Front-End Developer**</a> | <a href="https://blog.udacity.com/2014/12/front-end-vs-back-end-vs-full-stack-web-developers.html" target="_blank">**Back-End Developer**</a> | <a href="https://blog.udacity.com/2014/12/front-end-vs-back-end-vs-full-stack-web-developers.html" target="_blank">**Back-End Developer**</a> |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------: |
-| [![Full-Stack Developer Image](https://avatars1.githubusercontent.com/u/36648956?s=460&u=231204fcec6ae5e59f7249acf062af41d00fbc1c&v=4)](https://github.com/Bagusth15) |             [![Front-End Developer Image](https://avatars0.githubusercontent.com/u/64903162?s=460&v=4)](http://fvcproductions.com)             |             [![Front-End Developer Image](https://avatars0.githubusercontent.com/u/64903162?s=460&v=4)](http://fvcproductions.com)             |             [![Back-End Developer Image](https://avatars2.githubusercontent.com/u/67205885?s=460&v=4)](http://fvcproductions.com)             |             [![Back-End Developer Image](https://avatars0.githubusercontent.com/u/64903162?s=460&v=4)](http://fvcproductions.com)             |
-|                                       <a href="https://github.com/Bagusth15" target="_blank">`https://github.com/Bagusth15`</a>                                       |                <a href="https://github.com/link_github_frontend" target="_blank">`https://github.com/link_github_frontend`</a>                 |                <a href="https://github.com/link_github_frontend" target="_blank">`https://github.com/link_github_frontend`</a>                 |                 <a href="https://github.com/link_github_backend" target="_blank">`https://github.com/link_github_backend`</a>                 |                 <a href="https://github.com/link_github_backend" target="_blank">`https://github.com/link_github_backend`</a>                 |
-
----
+© [Dimas Prayoga](https://github.com/careerdimasprayoga/)
