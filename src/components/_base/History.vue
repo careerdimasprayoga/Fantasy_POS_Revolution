@@ -8,7 +8,10 @@
             style="background-image: linear-gradient(120deg, #fbb2b4, white)"
           >
             <p class="card-text">Today's Income</p>
-            <h5 class="card-title">
+            <h5 class="card-title" v-if="this.dataTodayIncome === null || ''">
+              Rp. 0
+            </h5>
+            <h5 class="card-title" v-else>
               Rp.
               {{
                 this.dataTodayIncome
@@ -122,7 +125,6 @@ export default {
     this.chartConvert()
     this.getOrder()
     this.getOrder()
-    console.log(this.dataOrder)
   }
 }
 </script>
