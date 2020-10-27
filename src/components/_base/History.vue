@@ -124,7 +124,6 @@ export default {
     this.getCardYearIncome()
     this.chartConvert()
     this.getOrder()
-    this.getOrder()
   }
 }
 </script>
