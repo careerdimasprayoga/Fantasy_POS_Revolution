@@ -6,6 +6,8 @@ import Manage from '../views/Manage.vue'
 import History from '../views/History.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import ManageProduct from '../views/ManageProduct.vue'
+import ManageCategory from '../views/ManageCategory.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +22,18 @@ const routes = [
     path: '/manage',
     name: 'Manage',
     component: Manage,
+    meta: { requiresAdmin: true }
+  },
+  {
+    path: '/manage_product',
+    name: 'ManageProduct',
+    component: ManageProduct,
+    meta: { requiresAdmin: true }
+  },
+  {
+    path: '/manage_category',
+    name: 'ManageCategory',
+    component: ManageCategory,
     meta: { requiresAdmin: true }
   },
   {

@@ -10,9 +10,7 @@
             <img src="../../assets/images/icons/menu.png" class="headerIcon" />
           </b-col>
           <b-col sm="6">
-            <h2 class="text-center textHeader">
-              Fantasy POS Revolution
-            </h2>
+            <h2 class="text-center textHeader">Fantasy</h2>
           </b-col>
           <b-col sm="3"> </b-col>
         </b-row>

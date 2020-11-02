@@ -7,10 +7,14 @@
       <b-col sm="8" class="columnStyle">
         <b-row class="rowStyle" style="box-shadow: 0 4px 5px -2px gray">
           <b-col sm="3">
-            <img src="../../assets/images/icons/menu.png" class="headerIcon" />
+            <img
+              src="../../assets/images/icons/menu.png"
+              class="headerIcon"
+              @click="pushSortirVisible()"
+            />
           </b-col>
           <b-col sm="6">
-            <h2 class="text-center textHeader">Fantasy POS Revolution</h2>
+            <h2 class="text-center textHeader">Fantasy</h2>
           </b-col>
           <b-col sm="6"> </b-col>
         </b-row>
@@ -24,18 +28,43 @@
           box-shadow: 0 4px 5px -2px gray;
         "
       >
-        <p class="text-center textMenu">Cart</p>
+        <p class="text-center textMenu">
+          Cart
+          <span
+            style="
+              background-color: #57cad5;
+              border-radius: 50px;
+              display: inline-block;
+              width: 35px;
+              height: 35px;
+              font-size: 25px;
+              color: white;
+            "
+            >{{ this.getCart.length }}</span
+          >
+        </p>
       </b-col>
     </b-row>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import mixins from '../../mixins/mixins'
+
 export default {
   name: 'Header',
+  mixins: [mixins],
+  data() {
+    return {
+      visibleSortir: this.dataSortirVisible
+    }
+  },
   methods: {
     ...mapActions(['logout'])
+  },
+  computed: {
+    ...mapGetters(['getCart'])
   }
 }
 </script>

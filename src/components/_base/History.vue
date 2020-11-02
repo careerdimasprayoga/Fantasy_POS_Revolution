@@ -43,7 +43,10 @@
             style="background-image: linear-gradient(120deg, #ab84c8, white)"
           >
             <p class="card-text">This Year's Income</p>
-            <h5 class="card-title">
+            <h5 class="card-title" v-if="this.dataYearIncome === null || ''">
+              Rp. 0
+            </h5>
+            <h5 class="card-title" v-else>
               Rp.
               {{
                 this.dataYearIncome
@@ -57,14 +60,44 @@
       </b-col>
       <b-col xl="12">
         <div class="styleCard mt-3 rounded">
-          <h4 class="mb-5 mt-1">Revenue</h4>
+          <h4 class="mt-1">Revenue</h4>
+          <b-button
+            @click="refreshRevenue()"
+            class="refresh"
+            size="sm"
+            variant="secondary"
+          >
+            <b-icon icon="arrow-repeat" font-scale="1.5"></b-icon
+          ></b-button>
           <area-chart :data="dataChart"></area-chart>
         </div>
       </b-col>
-      <b-col xl="12">
+      <b-col xl="12" class="mb-5">
         <div class="styleCard mt-3 rounded">
-          <h4 class="mb-5 mt-1">Recent Order</h4>
-          <b-table small :fields="fields" :items="dataOrder" responsive="sm">
+          <h4 class="mt-1">Recent Order</h4>
+          <b-button
+            @click="refreshOrder()"
+            class="refreshOrder"
+            size="sm"
+            variant="secondary"
+          >
+            <b-icon icon="arrow-repeat" font-scale="1.5"></b-icon
+          ></b-button>
+          <b-table small :fields="fields" :items="dataOrder" responsive="md">
+            <template v-slot:cell(invoices)="data">
+              # {{ data.item.invoices }}
+            </template>
+            <template v-slot:cell(dates)="data">
+              {{ data.item.dates | moment('DD MMMM YYYY, HH:mm:ss') }}
+            </template>
+            <template v-slot:cell(subtotals)="data">
+              Rp.
+              {{
+                data.item.subtotals
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+              }}
+            </template>
           </b-table>
         </div>
       </b-col>
@@ -107,6 +140,7 @@ export default {
       'getOrder'
     ]),
     chartConvert() {
+      this.dataChart = {}
       let result = {}
       for (let i = 0; i < this.dataChatThisMonth.length; i++) {
         result[this.dataChatThisMonth[i].dates] = this.dataChatThisMonth[
@@ -114,6 +148,14 @@ export default {
         ].subtotals
       }
       this.dataChart = result
+    },
+    refreshRevenue() {
+      this.getChartThisMonth()
+      this.chartConvert()
+    },
+    refreshOrder() {
+      this.getOrder()
+      this.dataOrder()
     }
   },
   created() {
@@ -132,6 +174,16 @@ export default {
 @import '../../assets/css/fonts.css';
 .background {
   background-color: rgba(190, 195, 202, 0.3);
+}
+.refresh {
+  margin-left: 110px;
+  margin-top: -65px;
+  border-radius: 5px;
+}
+.refreshOrder {
+  margin-left: 160px;
+  margin-top: -65px;
+  border-radius: 5px;
 }
 .styleCard {
   background-color: white;

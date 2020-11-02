@@ -1,5 +1,5 @@
 export default {
-  data() {
+  data () {
     return {
       urlApi: process.env.VUE_APP_URL,
       alertSuccess: false,

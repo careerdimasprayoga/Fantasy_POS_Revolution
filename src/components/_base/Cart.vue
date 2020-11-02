@@ -2,7 +2,7 @@
   <b-row>
     <b-col sm="12" v-if="getCart === undefined || getCart.length > 0">
       <b-container>
-        <div style="height: 405px; overflow: auto">
+        <div style="height: 380px; overflow: auto">
           <div>
             <b-card
               v-bind:img-src="urlApi + '/' + item.product_image"
@@ -56,10 +56,10 @@
         </div>
         <div>
           <b-row>
-            <b-col xl="4" style="margin-top: 10px">
-              <p>Total:</p>
+            <b-col xl="3" style="margin-top: 10px">
+              <p>Ppn :</p>
             </b-col>
-            <b-col xl="8" style="margin-top: 10px">
+            <b-col xl="9" style="margin-top: 10px">
               <p class="text-right">
                 Rp.
                 {{
@@ -67,7 +67,25 @@
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
                 }}
-                *
+                + Rp.
+                {{
+                  TotalPpn()
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                }}
+              </p>
+            </b-col>
+            <b-col xl="3" style="margin-top: -10px">
+              <p>Total :</p>
+            </b-col>
+            <b-col xl="9" style="margin-top: -10px">
+              <p class="text-right">
+                Rp.
+                {{
+                  (TotalCart() + TotalPpn())
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+                }}
               </p>
             </b-col>
             <b-col xl="12">
@@ -77,6 +95,7 @@
                 size="md"
                 style="width: 100%"
                 v-b-modal.modal-checkout
+                @click="checkout()"
                 >Checkout</b-button
               >
             </b-col>
@@ -87,7 +106,9 @@
                   <p class="font-medium">Checkout</p>
                 </b-col>
                 <b-col sm="6" class="text-right">
-                  <p class="font-medium">Receipt no: #{{ this.invoice }}</p>
+                  <p class="font-medium">
+                    Receipt no: #{{ this.getCart[0].invoice }}
+                  </p>
                 </b-col>
                 <b-col sm="12" style="margin-top: -15px; margin-bottom: 15px">
                   <p class="font-book">Cashier: {{ this.userLogin.name }}</p>
@@ -109,7 +130,7 @@
                   <p class="font-medium text-right">
                     Total : Rp.
                     {{
-                      TotalCart()
+                      TotalPrice()
                         .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
                     }}
@@ -124,7 +145,6 @@
                     variant="info"
                     size="md"
                     class="styleModalCheckout"
-                    @click="checkout()"
                     >Print</b-button
                   >
                 </b-col>
@@ -137,6 +157,12 @@
                   <b-button variant="info" size="md" style="width: 100%"
                     >Send Email</b-button
                   >
+                  <hr />
+                </b-col>
+                <b-col sm="12">
+                  <b-button size="sm" class="float-right" @click="resetCarts()">
+                    <b-icon icon="x-square"></b-icon> Close
+                  </b-button>
                 </b-col>
               </b-row>
             </b-modal>
@@ -164,16 +190,7 @@
             sm="12"
             xs="12"
           />
-          <p
-            style="
-              font-size: 25px;
-              font-weight: bold;
-              line-height: 10pt;
-              margin-top: -20px;
-            "
-          >
-            Your cart is empty
-          </p>
+          <p class="emptyCart">Your cart is empty</p>
           <p style="font-size: 15px; font-weight: bold; color: #cecece">
             Please add some items from the menu
           </p>
@@ -191,14 +208,21 @@ export default {
   mixins: [mixins],
   data() {
     return {
-      urlApi: process.env.VUE_APP_URL
+      urlApi: process.env.VUE_APP_URL,
+      invoice: 0
     }
   },
   computed: {
     ...mapGetters(['getCart', 'userLogin'])
   },
   methods: {
-    ...mapMutations(['resetCarts', 'qtyPlusCarts', 'qtyMinCarts']),
+    ...mapMutations([
+      'resetCarts',
+      'qtyPlusCarts',
+      'qtyMinCarts',
+      'pushCarts',
+      'resetCarts'
+    ]),
     ...mapActions(['addOrders']),
     qtyPlus(data) {
       this.qtyPlusCarts(data)
@@ -213,17 +237,44 @@ export default {
       }
       return total
     },
+    TotalPpn() {
+      let total = 0
+      for (let i = 0; i < this.getCart.length; i++) {
+        total += this.getCart[i].product_price * this.getCart[i].qty
+      }
+      let ppn = (total * 5) / 100
+      return ppn
+    },
+    TotalPrice() {
+      let total = 0
+      for (let i = 0; i < this.getCart.length; i++) {
+        total += this.getCart[i].product_price * this.getCart[i].qty
+      }
+      let ppn = (total * 5) / 100
+      return total + ppn
+    },
     checkout() {
       const dataCarts = {
         orders: [...this.getCart]
       }
-      console.log(dataCarts)
       this.addOrders(dataCarts)
         .then((response) => {
-          console.log(response)
+          this.$swal({
+            position: 'center',
+            icon: 'success',
+            title: response,
+            showConfirmButton: true,
+            timer: 2100
+          })
         })
         .catch((error) => {
-          console.log(error)
+          this.$swal({
+            position: 'center',
+            icon: 'error',
+            title: error,
+            showConfirmButton: false,
+            timer: 2500
+          })
         })
     }
   }
@@ -251,6 +302,12 @@ export default {
   margin: auto;
   margin-left: 10px;
 }
+.emptyCart {
+  font-size: 25px;
+  font-weight: bold;
+  line-height: 10pt;
+  margin-top: -20px;
+}
 .cart-qty {
   border-radius: 0;
   border: 1px solid #82de3a;
@@ -266,7 +323,6 @@ export default {
 }
 .styleName {
   font-family: AirMedium;
-  line-height: 3px;
   font-size: 12pt;
   margin-bottom: 25px;
 }

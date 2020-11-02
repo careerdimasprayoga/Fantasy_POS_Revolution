@@ -3,31 +3,65 @@
     <b-row class="text-center">
       <b-col xl="12">
         <router-link to="/">
-          <img src="../../assets/images/icons/fork.png" class="sideMenuIcon" />
+          <img
+            src="../../assets/images/icons/whiteblack/fork.png"
+            class="sideMenuIcon"
+          />
+          <!-- Main -->
         </router-link>
       </b-col>
       <b-col xl="12" v-if="this.isAdmin === 2">
         <router-link to="/history">
           <img
-            src="../../assets/images/icons/clipboard.png"
+            src="../../assets/images/icons/whiteblack/clipboard.png"
             class="sideMenuIcon"
           />
+          <!-- History -->
+        </router-link>
+      </b-col>
+      <b-col xl="12" v-if="this.isAdmin === 2">
+        <router-link to="/manage_product">
+          <img
+            src="../../assets/images/icons/whiteblack/fast-food.png"
+            class="sideMenuIcon"
+          />
+          <!-- Product -->
+        </router-link>
+      </b-col>
+      <b-col xl="12" v-if="this.isAdmin === 2">
+        <router-link to="/manage_category">
+          <img
+            src="../../assets/images/icons/whiteblack/manage.png"
+            class="sideMenuIcon"
+          />
+          <!-- Category -->
         </router-link>
       </b-col>
       <b-col xl="12" v-if="this.isAdmin === 2">
         <router-link to="/manage">
           <img
-            src="../../assets/images/icons/manage.png"
+            src="../../assets/images/icons/whiteblack/network.png"
             class="sideMenuIcon"
           />
+          <!-- User -->
+        </router-link>
+      </b-col>
+      <b-col xl="12">
+        <router-link to="/manage">
+          <img
+            src="../../assets/images/icons/whiteblack/girl.png"
+            class="sideMenuIcon"
+          />
+          <!-- Profile -->
         </router-link>
       </b-col>
       <b-col xl="12">
         <img
-          src="../../assets/images/icons/fire-exit.png"
+          src="../../assets/images/icons/whiteblack/exit.png"
           class="sideMenuIcon cursorPointer"
           @click="logout"
         />
+        <!-- Logout -->
       </b-col>
     </b-row>
   </div>

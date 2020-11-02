@@ -5,12 +5,12 @@ export default {
     orders: []
   },
   mutations: {
-    pushDataOrder(state, payload) {
+    pushDataOrder (state, payload) {
       state.orders = payload
     }
   },
   actions: {
-    addOrders(context, payload) {
+    addOrders (context, payload) {
       return new Promise((resolve, reject) => {
         axios
           .post(`${process.env.VUE_APP_URL}/order`, payload)
@@ -22,7 +22,7 @@ export default {
           })
       })
     },
-    getOrder(context, payload) {
+    getOrder (context, payload) {
       axios
         .get(`${process.env.VUE_APP_URL}/order`, payload)
         .then(response => {
@@ -34,7 +34,7 @@ export default {
     }
   },
   getters: {
-    dataOrder(state) {
+    dataOrder (state) {
       return state.orders
     }
   }

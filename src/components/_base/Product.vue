@@ -89,14 +89,17 @@
                   >
                 </b-card>
               </b-col>
-              <b-pagination
-                style="margin: auto; margin-top: 25px; margin-bottom: 30px"
-                :total-rows="dataTotalProducts"
-                :per-page="6"
-                v-model="currentPage"
-                aria-controls="my-table"
-                @change="changePage"
-              ></b-pagination>
+              <b-col sm="12">
+                <b-pagination
+                  class="justify-content-center"
+                  style="margin-top: 25px; margin-bottom: 30px"
+                  :total-rows="dataTotalProducts"
+                  :per-page="6"
+                  v-model="currentPage"
+                  aria-controls="my-table"
+                  @change="changePage"
+                ></b-pagination>
+              </b-col>
             </b-row>
           </div>
         </b-container>
@@ -153,7 +156,7 @@ export default {
     },
     addToCart(data) {
       let dataCart = {
-        invoice: this.invoice,
+        invoice: Math.floor(Math.random() * 1000000000 + 1),
         product_id: data.id,
         product_name: data.name,
         product_image: data.image,
@@ -179,7 +182,8 @@ export default {
   height: 700px;
 }
 .searchStyle {
-  height: 90px;
+  height: 85px;
+  margin-top: -10px;
 }
 .formStyle {
   margin-top: 20px;

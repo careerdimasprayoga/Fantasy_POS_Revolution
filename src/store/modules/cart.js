@@ -3,7 +3,7 @@ export default {
     carts: []
   },
   mutations: {
-    pushCarts(state, payload) {
+    pushCarts (state, payload) {
       const fixedData = [...state.carts, payload]
       const addedItem = fixedData.find(
         item => item.product_id === payload.product_id
@@ -13,14 +13,16 @@ export default {
       )
       if (existItem) {
         addedItem.qty += 1
+        addedItem.price = addedItem.product_price * addedItem.qty
+        addedItem.ppn = (addedItem.price * 5) / 100
       } else {
         state.carts = [...state.carts, payload]
       }
     },
-    resetCarts(state, payload) {
+    resetCarts (state, payload) {
       state.carts = []
     },
-    qtyPlusCarts(state, payload) {
+    qtyPlusCarts (state, payload) {
       const incrementData = state.carts.find(
         value => value.product_id === payload.product_id
       )
@@ -28,11 +30,13 @@ export default {
       incrementData.price = payload.product_price * payload.qty
       incrementData.ppn = (payload.price * 5) / 100
     },
-    qtyMinCarts(state, payload) {
+    qtyMinCarts (state, payload) {
       const incrementData = state.carts.find(
         value => value.product_id === payload.product_id
       )
       incrementData.qty -= 1
+      incrementData.price = payload.product_price * payload.qty
+      incrementData.ppn = (payload.price * 5) / 100
       if (incrementData.qty < 1) {
         state.carts = state.carts.filter(
           item => item.product_id !== incrementData.product_id
@@ -42,7 +46,7 @@ export default {
   },
   actions: {},
   getters: {
-    getCart(state) {
+    getCart (state) {
       return state.carts
     }
   }
