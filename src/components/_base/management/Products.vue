@@ -238,10 +238,14 @@ export default {
     handleFile(event) {
       this.form.image = event.target.files[0]
       if (this.form.image.size >= 1000000) {
-        this.alertErrorMessage = 'Max Filesize 1 mb'
-        this.alertError = true
+        this.$swal({
+          position: 'center',
+          icon: 'error',
+          title: 'Max Image is 2Mb',
+          showConfirmButton: true,
+          timer: 2100
+        })
       } else {
-        this.alertError = false
       }
     },
     async addProducts() {
@@ -265,6 +269,7 @@ export default {
           this.actionGetProducts()
         })
       } catch (error) {
+        console.log(error)
         this.$swal({
           position: 'center',
           icon: 'error',
