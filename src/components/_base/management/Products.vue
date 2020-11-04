@@ -277,7 +277,6 @@ export default {
           this.actionGetProducts()
         })
       } catch (error) {
-        console.log(error)
         this.$swal({
           position: 'center',
           icon: 'error',
