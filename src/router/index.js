@@ -4,10 +4,10 @@ import store from '../store/index'
 import Main from '../views/Main.vue'
 import Manage from '../views/Manage.vue'
 import History from '../views/History.vue'
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
 import ManageProduct from '../views/ManageProduct.vue'
 import ManageCategory from '../views/ManageCategory.vue'
+import Auth from '../views/Auth.vue'
+import Regist from '../views/Regist.vue'
 
 Vue.use(VueRouter)
 
@@ -43,17 +43,17 @@ const routes = [
     meta: { requiresAdmin: true }
   },
   {
-    path: '/',
-    name: 'Login',
-    component: Login,
+    path: '/auth',
+    name: 'Auth',
+    component: Auth,
     meta: { requiresVisitor: true }
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: Register,
+    path: '/regist',
+    name: 'Regist',
+    component: Regist,
     meta: { requiresVisitor: true }
-  }
+  },
 ]
 
 const router = new VueRouter({
@@ -66,7 +66,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!store.getters.isLogin) {
       next({
-        path: '/'
+        path: '/auth'
       })
     } else {
       next()
