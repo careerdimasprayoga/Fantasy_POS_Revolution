@@ -237,7 +237,7 @@ export default {
     },
     handleFile(event) {
       this.form.image = event.target.files[0]
-      if (this.form.image.size >= 1000000) {
+      if (this.form.image.size >= 2097152) {
         this.$swal({
           position: 'center',
           icon: 'error',
@@ -245,11 +245,19 @@ export default {
           showConfirmButton: true,
           timer: 2100
         })
-      } else {
       }
     },
     async addProducts() {
       try {
+        if (this.form.image.size >= 2097152) {
+          this.$swal({
+            position: 'center',
+            icon: 'error',
+            title: 'Max Image is 2Mb',
+            showConfirmButton: true,
+            timer: 2100
+          })
+        }
         const data = new FormData()
         data.append('name', this.form.name)
         data.append('id_category', this.form.id_category)
@@ -281,6 +289,15 @@ export default {
     },
     async editProducts() {
       try {
+        if (this.form.image.size >= 2097152) {
+          this.$swal({
+            position: 'center',
+            icon: 'error',
+            title: 'Max Image is 2Mb',
+            showConfirmButton: true,
+            timer: 2100
+          })
+        }
         await this.mutationSendIdProducts(this.form.id_products)
 
         const data = new FormData()
