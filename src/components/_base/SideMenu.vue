@@ -2,7 +2,7 @@
   <div id="sideMenu">
     <b-row class="text-center">
       <b-col xl="12">
-        <router-link to="/">
+        <router-link to="/main">
           <img
             src="../../assets/images/icons/whiteblack/fork.png"
             class="sideMenuIcon"
@@ -59,7 +59,7 @@
         <img
           src="../../assets/images/icons/whiteblack/exit.png"
           class="sideMenuIcon cursorPointer"
-          @click="logout"
+          @click="functLogout"
         />
         <!-- Logout -->
       </b-col>
@@ -76,7 +76,39 @@ export default {
     ...mapGetters(['isAdmin'])
   },
   methods: {
-    ...mapActions(['logout'])
+    ...mapActions(['logout']),
+    functLogout() {
+      this.$confirm({
+        message: `Are you sure for sign out ?`,
+        button: {
+          no: 'No',
+          yes: 'Yes'
+        },
+        callback: (confirm) => {
+          if (confirm) {
+            this.logout()
+              .then((response) => {
+                this.$swal({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Sign out success',
+                  showConfirmButton: true,
+                  timer: 2100
+                })
+              })
+              .catch((error) => {
+                this.$swal({
+                  position: 'center',
+                  icon: 'error',
+                  title: error,
+                  showConfirmButton: true,
+                  timer: 2100
+                })
+              })
+          }
+        }
+      })
+    }
   }
 }
 </script>

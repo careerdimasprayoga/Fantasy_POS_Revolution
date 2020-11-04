@@ -7,17 +7,17 @@ export default {
     token: localStorage.getItem('token') || null
   },
   mutations: {
-    setUser(state, payload) {
+    setUser (state, payload) {
       state.user = payload
       state.token = payload.token
     },
-    delUser(state) {
+    delUser (state) {
       state.user = {}
       state.token = null
     }
   },
   actions: {
-    login(context, payload) {
+    login (context, payload) {
       return new Promise((resolve, reject) => {
         axios
           .post(`${process.env.VUE_APP_URL}/user/login`, payload)
@@ -31,7 +31,7 @@ export default {
           })
       })
     },
-    register(context, payload) {
+    register (context, payload) {
       return new Promise((resolve, reject) => {
         axios
           .post(`${process.env.VUE_APP_URL}/user/register`, payload)
@@ -44,28 +44,28 @@ export default {
           })
       })
     },
-    logout(context) {
+    logout (context) {
       localStorage.removeItem('token')
       context.commit('delUser')
-      router.push('/')
+      router.push('/auth')
     },
-    interceptorRequest(context) {
+    interceptorRequest (context) {
       axios.interceptors.request.use(
-        function(config) {
+        function (config) {
           config.headers.Authorization = `Bearer ${context.state.token}`
           return config
         },
-        function(error) {
+        function (error) {
           return Promise.reject(error)
         }
       )
     },
-    interceptorResponse(context) {
+    interceptorResponse (context) {
       axios.interceptors.response.use(
-        function(response) {
+        function (response) {
           return response
         },
-        function(error) {
+        function (error) {
           if (error.response.status === 403) {
             if (
               error.response.data.msg === 'invalid token' ||
@@ -90,13 +90,13 @@ export default {
     }
   },
   getters: {
-    isLogin(state) {
+    isLogin (state) {
       return state.token !== null
     },
-    isAdmin(state) {
+    isAdmin (state) {
       return state.user.role_id
     },
-    userLogin(state) {
+    userLogin (state) {
       return state.user
     }
   }

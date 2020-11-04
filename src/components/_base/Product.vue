@@ -59,7 +59,7 @@
       <b-col sm="12">
         <b-container class="styleContainer">
           <div class="productStyle">
-            <b-row class="rowStyle">
+            <b-row>
               <b-col
                 xl="4"
                 lg="6"
@@ -72,6 +72,7 @@
                   img-alt="Image"
                   img-top
                   class="cardStyle"
+                  @click="addToCart(item)"
                 >
                   <b-card-text class="cardStyle-text-name font-book">{{
                     item.name
@@ -83,9 +84,6 @@
                         .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
                     }}</b-card-text
-                  >
-                  <b-button variant="primary" @click="addToCart(item)" size="sm"
-                    >Add</b-button
                   >
                 </b-card>
               </b-col>
@@ -211,9 +209,15 @@ export default {
   background-color: transparent;
   border: none;
   font-size: 16pt;
+  margin-left: 5px;
+}
+.cardStyle:hover {
+  cursor: pointer;
 }
 .cardStyle img {
   object-fit: cover;
+  width: 255px !important;
+  height: 200px !important;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
