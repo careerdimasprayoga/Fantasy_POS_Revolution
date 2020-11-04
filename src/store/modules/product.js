@@ -97,7 +97,6 @@ export default {
             resolve(response.data.msg)
           })
           .catch(error => {
-            console.log(error)
             reject(error.response.data.msg)
           })
       })
@@ -113,7 +112,6 @@ export default {
             resolve(response.data.msg)
           })
           .catch(error => {
-            console.log(error)
             reject(error.response.data.msg)
           })
       })
