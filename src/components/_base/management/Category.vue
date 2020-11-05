@@ -94,7 +94,7 @@ export default {
     return {
       conditionEdit: false,
       fields: [
-        { key: 'category_name', label: 'Category' },
+        { key: 'category_name', label: 'Category'},
         { key: 'category_id', label: 'Category' }
       ],
       form: {
@@ -239,9 +239,6 @@ export default {
 .heading {
   height: 40px;
   background-color: #a5a5a5;
-}
-table {
-  border: 1px solid #cecece;
 }
 .searchStyle {
   height: 70px;

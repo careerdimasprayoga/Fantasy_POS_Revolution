@@ -13,6 +13,9 @@
       <b-col sm="3" style="padding: 0">
         <Cart />
       </b-col>
+      <b-col sm="12" style="background-color: #ffffff; height: 60px;">
+        <p class="text-center font-book" style="margin-top: 15px">Built with <b-icon icon="heart-fill" variant="danger" font-scale="0.9"></b-icon> by Dimas Prayoga</p>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -35,6 +38,7 @@ export default {
 </script>
 
 <style scoped>
+@import '../assets/css/fonts.css';
 .noOverflow {
   overflow-x: hidden;
 }

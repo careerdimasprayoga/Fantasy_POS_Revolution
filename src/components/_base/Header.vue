@@ -16,7 +16,13 @@
           <b-col sm="6">
             <h2 class="text-center textHeader">Fantasy</h2>
           </b-col>
-          <b-col sm="6"> </b-col>
+          <b-col sm="3">
+            <img
+              src="../../assets/images/icons/find.png"
+              class="headerIconSearch"
+              @click="searchVisible()"
+            />
+          </b-col>
         </b-row>
       </b-col>
       <b-col
@@ -49,7 +55,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import mixins from '../../mixins/mixins'
 
 export default {
@@ -61,10 +67,18 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['logout'])
+    ...mapActions(['logout']),
+    ...mapMutations(['pushShowSearch']),
+    searchVisible() {
+      if(this.dataShowSearch === false) {
+        this.pushShowSearch(true)
+      } else {
+        this.pushShowSearch(false)
+      }
+    }
   },
   computed: {
-    ...mapGetters(['getCart'])
+    ...mapGetters(['getCart','dataShowSearch'])
   }
 }
 </script>
@@ -96,6 +110,16 @@ export default {
   margin-right: 20px;
 }
 .headerIcon:hover {
+  cursor: pointer;
+}
+.headerIconSearch {
+  width: 35px;
+  height: 35px;
+  margin-top: 15px;
+  margin-right: 20px;
+  float: right;
+}
+.headerIconSearch:hover {
   cursor: pointer;
 }
 .columnStyle {

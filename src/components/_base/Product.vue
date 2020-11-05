@@ -1,7 +1,7 @@
 <template>
   <div id="product">
     <b-row>
-      <b-col sm="12">
+      <b-col sm="12" v-if="dataShowSearch === true">
         <div class="searchStyle">
           <b-form
             inline
@@ -10,7 +10,7 @@
           >
             <b-input
               id="inline-form-input-name"
-              class="mb-2 mr-sm-2 mb-sm-0"
+              class="mr-2 mt-2"
               placeholder="Search Product"
               v-model="search"
             ></b-input>
@@ -18,8 +18,8 @@
             <b-dropdown
               id="sort"
               :text="textSort"
-              class="m-2 sort-btn"
-              variant="primary"
+              class="mr-2 mt-2"
+              variant="info"
             >
               <b-dropdown-item-button @click="sort('category')" active
                 >Category</b-dropdown-item-button
@@ -52,11 +52,11 @@
                 >
               </b-dropdown-group>
             </b-dropdown>
-            <b-button type="submit" variant="primary">Find</b-button>
+            <b-button type="submit" class="mt-2" variant="info">Find</b-button>
           </b-form>
         </div>
       </b-col>
-      <b-col sm="12">
+      <b-col sm="12" class="mt-4">
         <b-container class="styleContainer">
           <div class="productStyle">
             <b-row>
@@ -118,11 +118,12 @@ export default {
       textSort: 'Sort',
       currentPage: 1,
       urlApi: process.env.VUE_APP_URL,
-      search: ''
+      search: '',
+      showSearch: true
     }
   },
   computed: {
-    ...mapGetters(['dataProducts', 'dataTotalProducts', 'getCart'])
+    ...mapGetters(['dataProducts', 'dataTotalProducts', 'getCart','dataShowSearch'])
   },
   methods: {
     ...mapActions({
@@ -180,11 +181,11 @@ export default {
   height: 700px;
 }
 .searchStyle {
-  height: 85px;
+  height: 60px;
   margin-top: -10px;
 }
 .formStyle {
-  margin-top: 20px;
+  margin-top: 15px;
   margin-right: 30px;
 }
 .productStyle {
@@ -204,6 +205,10 @@ export default {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #7e98df;
+}
+.sort-btn {
+  background-color: #7e98df !important;
+  border: none;
 }
 .cardStyle {
   background-color: transparent;

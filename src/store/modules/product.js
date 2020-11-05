@@ -6,7 +6,8 @@ export default {
     idProducts: 1,
     page: 1,
     limit: 6,
-    totalProducts: 1
+    totalProducts: 1,
+    showSearch: true
   },
   mutations: {
     pushProducts (state, payload) {
@@ -20,6 +21,9 @@ export default {
     },
     pushSendIdProducts (state, payload) {
       state.idProducts = payload
+    },
+    pushShowSearch(state, payload) {
+      state.showSearch = payload
     }
   },
   actions: {
@@ -123,6 +127,9 @@ export default {
     },
     dataTotalProducts (state) {
       return state.totalProducts
+    },
+    dataShowSearch(state) {
+      return state.showSearch
     }
   }
 }
