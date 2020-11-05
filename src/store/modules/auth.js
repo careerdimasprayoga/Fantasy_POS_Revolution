@@ -47,7 +47,7 @@ export default {
     logout (context) {
       localStorage.removeItem('token')
       context.commit('delUser')
-      router.push('/auth')
+      router.push('/')
     },
     interceptorRequest (context) {
       axios.interceptors.request.use(
