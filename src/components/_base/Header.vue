@@ -14,7 +14,7 @@
             />
           </b-col>
           <b-col sm="6">
-            <h2 class="text-center textHeader">Fantasy</h2>
+            <h2 class="text-center textHeader">Fantasy Pos</h2>
           </b-col>
           <b-col sm="3">
             <img

@@ -102,6 +102,12 @@
             <!-- ================ Modal ================ -->
             <b-modal id="modal-checkout" hide-header hide-footer>
               <b-row>
+                <b-col sm="12">
+                  <b-button size="sm" class="float-right mb-2" @click="resetCarts()" variant="danger">
+                    Close <b-icon icon="x-square"></b-icon>
+                  </b-button>
+                </b-col>
+                <hr>
                 <b-col sm="6">
                   <p class="font-medium">Checkout</p>
                 </b-col>
@@ -157,12 +163,6 @@
                   <b-button variant="info" size="md" style="width: 100%"
                     >Send Email</b-button
                   >
-                  <hr />
-                </b-col>
-                <b-col sm="12">
-                  <b-button size="sm" class="float-right" @click="resetCarts()">
-                    <b-icon icon="x-square"></b-icon> Close
-                  </b-button>
                 </b-col>
               </b-row>
             </b-modal>
