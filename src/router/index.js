@@ -43,7 +43,7 @@ const routes = [
     meta: { requiresAdmin: true }
   },
   {
-    path: '/auth',
+    path: '/',
     name: 'Auth',
     component: Auth,
     meta: { requiresVisitor: true }
@@ -66,7 +66,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!store.getters.isLogin) {
       next({
-        path: '/auth'
+        path: '/'
       })
     } else {
       next()

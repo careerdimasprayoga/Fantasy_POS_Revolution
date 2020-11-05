@@ -93,7 +93,7 @@ export default {
             showConfirmButton: true,
             timer: 2100
           })
-          setTimeout(() => this.$router.push('/auth'), 500)
+          setTimeout(() => this.$router.push('/'), 500)
         })
         .catch((error) => {
           this.$swal({
@@ -106,7 +106,7 @@ export default {
         })
     },
     onLogin() {
-      this.$router.push('/auth')
+      this.$router.push('/')
     }
   }
 }
