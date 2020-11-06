@@ -5,7 +5,7 @@
         <b-card header-tag="header" class="mt-4">
           <template #header>
             <b-button
-              variant="info"
+              variant="primary"
               size="sm"
               v-b-modal.modal-1
               @click="clickAddCategory()"
@@ -13,7 +13,7 @@
               <b-icon icon="plus" font-scale="1.5"></b-icon>
             </b-button>
             <b-button
-              variant="primary"
+              variant="secondary"
               size="sm"
               class="ml-2"
               @click="refresh()"

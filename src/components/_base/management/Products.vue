@@ -5,14 +5,14 @@
         <b-card header-tag="header" class="mt-4">
           <template #header>
             <b-button
-              variant="info"
+              variant="primary"
               size="sm"
               v-b-modal.modal-1
               @click="clickAddProducts()"
             >
               <b-icon icon="plus" font-scale="1.5"></b-icon>
             </b-button>
-            <b-button variant="primary" size="sm" class="ml-2">
+            <b-button variant="secondary" size="sm" class="ml-2">
               <b-icon icon="arrow-repeat" font-scale="1.5"></b-icon>
             </b-button>
           </template>
