@@ -203,7 +203,7 @@ input:focus {
     width: 600px;
     height: 400px;
   }
-  .mr-3 {
+  .subHeader {
     margin-left: 30px;
   }
   .header {
@@ -222,7 +222,7 @@ input:focus {
   .card {
     width: 400px;
   }
-  .mr-3, .header {
+  .subHeader, .header {
     margin-left: 20px;
   }
 }
