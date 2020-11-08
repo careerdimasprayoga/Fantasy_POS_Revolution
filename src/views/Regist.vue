@@ -3,16 +3,16 @@
     <div class="card">
       <b-container fluid>
         <b-row>
-          <b-col sm="7">
+          <b-col xl="7">
             <img
               src="@/assets/images/icons/asu.png"
               alt="Logos"
               class="icons"
             />
           </b-col>
-          <b-col sm="5">
-            <h4 style="margin-top: 70px; color: ">Welcome :)</h4>
-            <p class="mr-3">
+          <b-col xl="5" sm="12">
+            <h4 class="header">Welcome :)</h4>
+            <p class="mr-3 subHeader">
               To connected with us please register with your personal
               information
               <b-icon
@@ -167,5 +167,103 @@ input {
 
 input:focus {
   border-bottom: 5px solid #4079ff;
+}
+.header {
+  margin-top: 70px;
+}
+
+@media (min-width: 576px) {
+  .card {
+    width: 400px;
+    height: 450px;
+    margin: auto;
+  }
+  .icons {
+    width: 0px;
+  }
+  .header, .subHeader {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+  form {
+    text-align: center;
+  }
+  input {
+    margin: auto;
+  }
+}
+@media (min-width: 1200px) {
+  .card {
+  width: 900px;
+  height: 500px;
+  background-color: #f7f7f7;
+  margin: auto;
+  box-shadow: 0px 0px 8px 1px #888888;
+  border: none;
+}
+  body {
+    font-family: Helvetica;
+  }
+  .btnCreateAccount {
+    border-radius: 30px;
+    background-color: #ffffff;
+    color: #333333;
+    border: none;
+  }
+  .btnLogin {
+    border-radius: 30px;
+    background-color: #618eff;
+    border: none;
+  }
+  .icons {
+    width: 550px;
+    margin-top: -40px;
+    margin-left: -20px;
+  }
+
+  input {
+    display: block;
+    width: 90%;
+    font-size: 12pt;
+    line-height: 28pt;
+    font-family: 'Helvetica';
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 5px solid #b5caff;
+    background: #edf2ff;
+    min-width: 250px;
+    padding-left: 5px;
+    outline: none;
+    color: rgba(0, 0, 0, 1);
+  }
+
+  input:focus {
+    border-bottom: 5px solid #4079ff;
+  }
+  .header {
+    margin-top: 70px;
+  }
+}
+@media (max-width: 575px) {
+  .icons {
+    width: 0;
+  }
+  .card {
+    width: 350px;
+    height: 400px;
+  }
+  .header { 
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+  .subHeader {
+    margin-left: 20px;
+  }
+  form {
+    text-align: center;
+  }
+  input {
+    margin: auto;
+  }
 }
 </style>
