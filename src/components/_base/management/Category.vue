@@ -95,7 +95,7 @@ export default {
       conditionEdit: false,
       fields: [
         { key: 'category_name', label: 'Category'},
-        { key: 'category_id', label: 'Category' }
+        { key: 'category_id', label: 'Action' }
       ],
       form: {
         name: '',

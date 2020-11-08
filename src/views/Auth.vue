@@ -3,15 +3,15 @@
     <div class="card">
       <b-container fluid>
         <b-row>
-          <b-col sm="7">
+          <b-col xl="7" md="6">
             <img
               src="@/assets/images/icons/asu.png"
               alt="Logos"
               class="icons"
             />
           </b-col>
-          <b-col sm="5">
-            <h4 style="margin-top: 70px; color: ">Welcome Back :)</h4>
+          <b-col xl="5" md="6">
+            <h4 class="header">Welcome Back :)</h4>
             <p class="mr-3">
               To keep connected with us please login with your personal
               information by email and password
@@ -160,5 +160,44 @@ input {
 
 input:focus {
   border-bottom: 5px solid #4079ff;
+}
+.header {
+  margin-top: 70px;
+}
+
+@media (max-width: 1200px) {
+  .icons {
+    width: 450px;
+    margin-top: -5px;
+    margin-right: -10px;
+  }
+}
+@media (max-width: 768px) {
+  .icons {
+    width: 0px;
+  }
+  .card {
+    width: 600px;
+    height: 400px;
+  }
+  .mr-3 {
+    margin-left: 30px;
+  }
+  .header {
+    margin-top: 20px;
+    margin-left: 30px;
+  }
+  form {
+    text-align: center;
+  }
+  input {
+    margin: auto;
+    margin-bottom: 15px;
+  }
+}
+@media (max-width: 576px) {
+  .card {
+    width: 400px;
+  }
 }
 </style>

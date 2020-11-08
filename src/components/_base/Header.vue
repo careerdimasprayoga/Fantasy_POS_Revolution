@@ -18,8 +18,15 @@
           </b-col>
           <b-col sm="3">
             <img
+            v-if="dataShowSearch === false"
               src="../../assets/images/icons/find.png"
               class="headerIconSearch"
+              @click="searchVisible()"
+            />
+            <img
+              v-else
+              src="../../assets/images/icons/close.png"
+              class="headerIconSearchTwo"
               @click="searchVisible()"
             />
           </b-col>
@@ -118,6 +125,16 @@ export default {
   margin-top: 15px;
   margin-right: 20px;
   float: right;
+}
+.headerIconSearchTwo {
+  width: 30px;
+  height: 30px;
+  margin-top: 17px;
+  margin-right: 20px;
+  float: right;
+}
+.headerIconSearchTwo:hover {
+  cursor: pointer;
 }
 .headerIconSearch:hover {
   cursor: pointer;

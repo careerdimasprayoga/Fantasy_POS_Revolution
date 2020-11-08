@@ -214,7 +214,6 @@ export default {
   background-color: transparent;
   border: none;
   font-size: 16pt;
-  margin-left: 5px;
 }
 .cardStyle:hover {
   cursor: pointer;
@@ -225,6 +224,7 @@ export default {
   height: 200px !important;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  margin: auto;
 }
 .cardStyle-text-name {
   margin-left: -10px;
