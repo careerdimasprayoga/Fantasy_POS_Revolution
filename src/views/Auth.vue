@@ -199,5 +199,8 @@ input:focus {
   .card {
     width: 400px;
   }
+  .mr-3, .header {
+    margin-left: 20px;
+  }
 }
 </style>
