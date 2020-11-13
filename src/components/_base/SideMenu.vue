@@ -42,7 +42,7 @@
           <img
             src="../../assets/images/icons/whiteblack/network.png"
             class="sideMenuIcon"
-            @click="underDevelopment()"
+            @click="underDevelopmentUser()"
           />
           <!-- User -->
         <!-- </router-link> -->
@@ -52,6 +52,7 @@
           <img
             src="../../assets/images/icons/whiteblack/girl.png"
             class="sideMenuIcon"
+            @click="underDevelopmentProfile()"
           />
           <!-- Profile -->
         </router-link>
