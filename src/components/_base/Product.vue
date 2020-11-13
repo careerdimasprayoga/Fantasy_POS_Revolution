@@ -239,13 +239,38 @@ export default {
   padding-bottom: 0;
 }
 @media (min-width: 992px) {
-  .cardStyle img {
+  /* .cardStyle img {
     width: 240px;
     height: 180px;
     object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
+  .cardStyle-text-name {
+    margin-left: 0px;
+    margin-top: -15px;
+  }
+  .cardStyle-text-price {
+    margin-left: 0px;
+    margin-top: -20px;
+  } */
+}
+@media (min-width: 768px) {
+  /* .cardStyle img {
+    width: 140px;
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  .cardStyle-text-name {
+    margin-left: 0px;
+    margin-top: -15px;
+  }
+  .cardStyle-text-price {
+    margin-left: 0px;
+    margin-top: -20px;
+  } */
 }
 .rowStyle {
   margin-left: 10px;

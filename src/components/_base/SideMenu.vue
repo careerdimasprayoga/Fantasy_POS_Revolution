@@ -38,13 +38,14 @@
         </router-link>
       </b-col>
       <b-col xl="12" v-if="this.isAdmin === 2">
-        <router-link to="/manage">
+        <!-- <router-link to="/manage"> -->
           <img
             src="../../assets/images/icons/whiteblack/network.png"
             class="sideMenuIcon"
+            @click="underDevelopment()"
           />
           <!-- User -->
-        </router-link>
+        <!-- </router-link> -->
       </b-col>
       <b-col xl="12">
         <router-link to="/manage">
@@ -77,6 +78,24 @@ export default {
   },
   methods: {
     ...mapActions(['logout']),
+    underDevelopmentUser() {
+      this.$swal({
+        position: 'center',
+        // icon: 'success',
+        title: 'Menu user is under development',
+        showConfirmButton: true,
+        timer: 2100
+      })
+    },
+    underDevelopmentProfile() {
+      this.$swal({
+        position: 'center',
+        // icon: 'success',
+        title: 'Menu profile is under development',
+        showConfirmButton: true,
+        timer: 2100
+      })
+    },
     functLogout() {
       this.$confirm({
         message: `Are you sure for sign out ?`,
