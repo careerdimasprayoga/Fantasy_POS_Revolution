@@ -48,14 +48,14 @@
         <!-- </router-link> -->
       </b-col>
       <b-col xl="12">
-        <router-link to="/manage">
+        <!-- <router-link to="/manage"> -->
           <img
             src="../../assets/images/icons/whiteblack/girl.png"
             class="sideMenuIcon"
             @click="underDevelopmentProfile()"
           />
           <!-- Profile -->
-        </router-link>
+        <!-- </router-link> -->
       </b-col>
       <b-col xl="12">
         <img
